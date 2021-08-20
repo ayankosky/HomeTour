@@ -44,13 +44,17 @@ public class Main {
 
 	private static void parse(String[] inputs, Player player, Map<String, Room> rooms) {
 		Room room = player.getCurrentRoom();
-		String locations[] = new String[3];
-		for (int i = 0; i < room.exitsLength(room); i++) {
-			locations[i] = room.getExitName(room, i);
-
-		}
+		String[] locations = new String[3];
+		
 		try {
-			if ((inputs[0].contentEquals("move") || inputs[0].equals("enter")) && (rooms.containsKey(inputs[1]))) {
+			for (int i = 0; i < room.exitsLength(room); i++) {
+				locations[i] = room.getExitName(room, i);
+
+				}
+
+			
+
+			if ((inputs[0].contentEquals("move") || inputs[0].equals("enter")) && (room.checkExit(room, inputs[1]))) {
 				room = (Room) rooms.get(inputs[1]);
 				player.setCurrentRoom(room);
 			} else if (inputs[0].contentEquals("quit")) {
@@ -67,6 +71,8 @@ public class Main {
 			;
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("Please enter a valid command.");
+		} catch (NullPointerException e) {
+			System.out.println("Please Enter a valid command.");
 		}
 
 	}

@@ -37,18 +37,18 @@ public class Room extends Fixture {
 
 	public void petCat(Map<String, Room> rooms, boolean hasCat) {
 		Room bedroom = (Room) rooms.get("bedroom");
-		
 
 		if (this.hasCat == true) {
-			if(this.name.equals("den"));
+			if (this.name.equals("den"))
+				;
 			System.out.println("The cat seems to tolerate your attention but then dashes off into the bedroom.");
 			this.hasCat = false;
 			this.longDescription = "You see a decent sized tv, a beat up leather love seat and couch.";
 			bedroom.setLongDescription(
-					"The master bedroom contains a walk in closet and en suite bathroom as well as a cat watching you from under the bed.");
+					"The master bedroom contains a walk in closet and en suite bathroom.  The cat is glaring at you from under the bed.");
 			bedroom.hasCat = true;
 
-		} 
+		}
 	}
 
 	public boolean getHasCat() {
@@ -92,5 +92,15 @@ public class Room extends Fixture {
 
 	public void setLongDescription(String s) {
 		this.longDescription = s;
+	}
+
+	public boolean checkExit(Room room, String input) {
+		ArrayList<String> exits = this.exits;
+		for (String exit : exits) {
+			if (input.toLowerCase().equals(exit.toLowerCase())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
